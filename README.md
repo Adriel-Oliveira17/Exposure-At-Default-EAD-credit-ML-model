@@ -87,7 +87,7 @@ O modelo apresentou alta capacidade preditiva e excelente calibração financeir
 
 ## Regra de Produção para Carteira Completa
 
-Para escorar 100% da carteira ativa em produção — incluindo clientes que já estão com o limite totalmente tomado ou estourado (`limite_livre_12m <= 0`) — foi implementada a função `prever_ead_carteira_completa(df_carteira, modelo_ccf)`:
+Para escorar 100% da carteira ativa em produção, incluindo clientes que já estão com o limite totalmente tomado ou estourado (`limite_livre_12m <= 0`), foi implementada a função `prever_ead_carteira_completa(df_carteira, modelo_ccf)`:
 
 - **Se `limite_livre_12m > 0`:** estima o $\text{CCF}_{\text{previsto}} \in [0, 1]$ via modelo e aplica a equação geral do EAD.
 - **Se `limite_livre_12m <= 0`:** assume que não há limite adicional a ser consumido e define `EAD = saldo_12m`.
