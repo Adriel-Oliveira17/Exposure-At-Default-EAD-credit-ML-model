@@ -59,8 +59,8 @@ A base simulada contém **10.000 registros** distribuídos em quatro safras anua
    - Seleção de clientes elegíveis com limite disponível (`limite_12m > saldo_12m`), resultando em **9.917 clientes** e evitando divisão por zero.
    - Aplicação de *clipping* no intervalo $[0.0, 1.0]$ para garantir aderência regulatória ao domínio do CCF.
 4. **Engenharia de Atributos (*Feature Engineering*):**
-   - `taxa_utilizacao_12m` = $\text{saldo\_12m} / \text{limite\_12m}$
-   - `comprometimento_renda` = $\text{saldo\_12m} / \text{renda\_mensal}$
+   - `taxa_utilizacao_12m` = `saldo_12m / limite_12m`
+   - `comprometimento_renda` = `saldo_12m / renda_mensal`
    - **Features finais do modelo:** `limite_12m`, `saldo_12m`, `qtd_atrasos_curtos_6m`, `pagou_minimo_ult_fatura`, `variacao_saldo_3m`, `taxa_utilizacao_12m` e `comprometimento_renda`.
 5. **Validação Temporal (*Out-of-Time* — OOT):**
    - **Treino:** Safras de `2022`, `2023` e `2024` (~75% da base).
@@ -90,7 +90,7 @@ O modelo apresentou alta capacidade preditiva e excelente calibração financeir
 Para escorar 100% da carteira ativa em produção — incluindo clientes que já estão com o limite totalmente tomado ou estourado (`limite_livre_12m <= 0`) — foi implementada a função `prever_ead_carteira_completa(df_carteira, modelo_ccf)`:
 
 - **Se `limite_livre_12m > 0`:** estima o $\text{CCF}_{\text{previsto}} \in [0, 1]$ via modelo e aplica a equação geral do EAD.
-- **Se `limite_livre_12m <= 0`:** assume que não há limite adicional a ser consumido e define $\text{EAD} = \text{saldo\_12m}$.
+- **Se `limite_livre_12m <= 0`:** assume que não há limite adicional a ser consumido e define `EAD = saldo_12m`.
 
 ---
 
