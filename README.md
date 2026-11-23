@@ -77,11 +77,24 @@ O modelo apresentou alta capacidade preditiva e excelente calibração financeir
 
 | Métrica | Valor Obtido | Interpretação |
 | :--- | :---: | :--- |
-| **MAE — CCF** | `0.0976` | Erro médio absoluto de ~9,8 pontos percentuais no fator de conversão |
-| **MAE — EAD** | `R$ 576,45` | Erro médio absoluto financeiro por contrato |
-| **RMSE — EAD** | `R$ 917,57` | Raiz do erro quadrático médio financeiro |
-| **$R^2$ — EAD** | `0.967` | O modelo explica 96,7% da variância do saldo no *default* |
-| **Calibração (EAD Médio Real vs. Previsto)** | `R$ 7.010,14` vs. `R$ 7.013,64` | Desvio agregado de apenas **R\$ 3,50 (+0,05%)** na carteira |
+| **Base Elegível (`default_12m == 1` e `limite_livre > 0`)** | `10.977 / 60.000` | Clientes inadimplentes com margem livre para conversão de limite |
+| **MAE — CCF** | `0.0592` | Erro médio absoluto de ~5,9 pontos percentuais no fator de conversão |
+| **MAE — EAD** | `R$ 315,51` | Erro médio absoluto financeiro por contrato |
+| **RMSE — EAD** | `R$ 504,14` | Raiz do erro quadrático médio financeiro |
+| **$R^2$ — EAD** | `0.992` | O modelo explica 99,2% da variância do saldo no *default* |
+| **Calibração (EAD Médio Real vs. Previsto)** | `R$ 8.238,05` vs. `R$ 8.236,83` | Desvio agregado de apenas **-R\$ 1,22 (-0,01%)** na carteira |
+
+### Calibração por Faixa de Limite Livre (OOT 2025)
+
+A aderência entre o saldo real no *default* e o EAD estimado manteve-se estável em todos os quintis de limite disponível:
+
+| Faixa (`limite_livre`) | EAD Médio Real | EAD Médio Previsto | Diferença (%) |
+| :---: | :---: | :---: | :---: |
+| **0** | `R$ 6.498,44` | `R$ 6.496,75` | `-0,03%` |
+| **1** | `R$ 6.754,33` | `R$ 6.759,25` | `+0,07%` |
+| **2** | `R$ 7.355,86` | `R$ 7.369,76` | `+0,19%` |
+| **3** | `R$ 8.881,73` | `R$ 8.883,61` | `+0,02%` |
+| **4** | `R$ 11.703,07` | `R$ 11.677,95` | `-0,21%` |
 
 ---
 
